@@ -1,10 +1,11 @@
-# Student Finance Tracker
+# stuFi App 
 
 ## Overview
 
-This is the frontend web-design summative project of a student finance tracker web application built with vanilla HTML, CSS, and JavaScript (no frameworks).
+**stuFi** (Student Finance) is a responsive web application for tracking student budgets and transactions, built with vanilla HTML, CSS, and JavaScript (no frameworks).
 
 **Live Demo**: GitHub Pages URL (add after deployment)
+
 **Video Demo**: Video demo URL (after recording)
 
 ## Spec & Wireframes
@@ -241,12 +242,6 @@ function safeRegexCompile(pattern, flags = 'i') {
 - Large text contrast ≥ 3:1
 - Focus indicators contrast ≥ 3:1
 - No information conveyed by color alone
-
-### Screen Reader Support
-- Tested with VoiceOver (macOS)
-- Tested with NVDA (Windows)
-- All images have alt text
-- Decorative elements have `aria-hidden="true"`
 
 ---
 
