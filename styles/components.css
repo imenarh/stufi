@@ -20,6 +20,38 @@
     margin-bottom: 24px;
 }
 
+.stat-card {
+    display: flex;
+    align-items: start;
+    gap: 16px;
+    padding: 20px 24px;
+}
+
+.stat-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(47%) sepia(89%) saturate(2867%) hue-rotate(134deg) brightness(95%) contrast(101%);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
 .progress-bar {
     height: 12px;
     background: var(--color-bg);

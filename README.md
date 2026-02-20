@@ -25,7 +25,7 @@ Wireframe sketches for each section of the app. Layout adapts across three break
 │Spent   │ Count  │        │ Trend  │
 ├────────┴────────┴────────┤        │
 │  Cap Progress Bar        │ Chart  │
-│  [====-------] RWF45/RWF100  │        │
+│  [====-------] RWF 45/RWF 100  │        │
 └──────────────────────────┴────────┘
 ```
 
@@ -48,12 +48,12 @@ Wireframe sketches for each section of the app. Layout adapts across three break
 │ ┌──────────────────┐ │
 │ │ Lunch at cafe    │ │
 │ │ Food · 2025-09-29│ │
-│ │ RWF12.50    ✏️ 🗑️ │ │
+│ │ RWF 12.50    ✏️ 🗑️ │ │
 │ └──────────────────┘ │
 │ ┌──────────────────┐ │
 │ │ Bus pass         │ │
 │ │ Transport · ...  │ │
-│ │ RWF45.00    ✏️ 🗑️ │ │
+│ │ RWF 45.00    ✏️ 🗑️ │ │
 │ └──────────────────┘ │
 └──────────────────────┘
 ```
@@ -67,7 +67,7 @@ Wireframe sketches for each section of the app. Layout adapts across three break
 │ [________________________]  │
 │ ⚠ No leading/trailing spaces│
 │                             │
-│ Amount (RWF) *    Date *      │
+│ Amount (RWF ) *    Date *      │
 │ [________]      [________]  │
 │                             │
 │ Category *                  │
@@ -81,7 +81,7 @@ Wireframe sketches for each section of the app. Layout adapts across three break
 ```
 ┌──────────────────────────────┐
 │ Spending Cap                 │
-│ [100.00] RWF                   │
+│ [100.00] RWF                    │
 │                              │
 │ Currency Rates               │
 │ Base: GBP  USD: [1.27]       │
@@ -164,10 +164,10 @@ To load sample data, go to `Settings` → Import JSON and select `seed.json`.
 
 | Pattern | Purpose | Example Match | Example Fail |
 |---------|---------|---------------|--------------|
-| `/^\S(?:.*\S)?$/` | Description: no leading/trailing spaces, no double spaces | `"Lunch at cafeteria"` | `" Lunch "` |
-| `/^(0\|[1-9]\d*)(\.\d{1,2})?$/` | Amount: positive number, max 2 decimals | `"12.50"`, `"0"`, `"100"` | `"-5"`, `"12.500"` |
-| `/^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])$/` | Date: YYYY-MM-DD format | `"2025-09-29"` | `"2025-13-01"` |
-| `/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/` | Category: letters, spaces, hyphens only | `"Food"`, `"Fast Food"` | `"Food123"` |
+| `/^\S(?:.*\S)?RWF /` | Description: no leading/trailing spaces, no double spaces | `"Lunch at cafeteria"` | `" Lunch "` |
+| `/^(0\|[1-9]\d*)(\.\d{1,2})?RWF /` | Amount: positive number, max 2 decimals | `"12.50"`, `"0"`, `"100"` | `"-5"`, `"12.500"` |
+| `/^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])RWF /` | Date: YYYY-MM-DD format | `"2025-09-29"` | `"2025-13-01"` |
+| `/^[A-Za-z]+(?:[ -][A-Za-z]+)*RWF /` | Category: letters, spaces, hyphens only | `"Food"`, `"Fast Food"` | `"Food123"` |
 
 ### Advanced Regex (Back-reference)
 
