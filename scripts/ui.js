@@ -73,9 +73,9 @@ var UI = (function() {
     }
 
     return {
-        renderTable: renderTable,
-        renderCards: renderCards,
-        updateCount: updateCount,
-        toggleEmpty: toggleEmpty
+        renderTable,
+        renderCards,
+        updateCount,
+        toggleEmpty
     };
 })();

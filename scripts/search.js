@@ -41,8 +41,8 @@ var Search = (function() {
     }
 
     return {
-        compileRegex: compileRegex,
-        filterRecords: filterRecords,
-        highlight: highlight
+        compileRegex,
+        filterRecords,
+        highlight
     };
 })();

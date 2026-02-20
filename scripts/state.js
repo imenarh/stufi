@@ -39,8 +39,8 @@ var State = (function() {
     }
 
     return {
-        init: init,
-        getRecords: getRecords,
-        sortRecords: sortRecords
+        init,
+        getRecords,
+        sortRecords
     };
 })();

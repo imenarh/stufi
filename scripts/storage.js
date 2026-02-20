@@ -24,7 +24,7 @@ var Storage = (function() {
     }
 
     return {
-        loadRecords: loadRecords,
-        saveRecords: saveRecords
+        loadRecords,
+        saveRecords
     };
 })();
