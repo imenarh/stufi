@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="stuFi Records - View, search, and manage your transaction history">
+    <meta name="theme-color" content="#2563eb">
+    <title>Records - stuFi</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="records.html" class="nav-link active" aria-current="page">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- Records Section -->
+        <section class="section records-section" aria-labelledby="records-heading">
+            <div class="container">
+                <h1 id="records-heading" class="section-title">Records</h1>
+                
+                <!-- Search and Sort Controls -->
+                <div class="records-controls">
+                    <div class="search-container">
+                        <label for="search-input" class="search-label">
+                            <span class="visually-hidden">Search transactions (regex supported)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="search-input" 
+                            placeholder="Search (regex supported)..."
+                            aria-describedby="search-help"
+                        >
+                        <div class="search-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="case-insensitive" checked>
+                                <span>Case insensitive</span>
+                            </label>
+                        </div>
+                        <p id="search-help" class="search-help">
+                            Try: <code>/coffee|tea/i</code> or <code>/\.\d{2}\b/</code>
+                        </p>
+                    </div>
+                    <div class="sort-container">
+                        <label for="sort-select" class="visually-hidden">Sort by</label>
+                        <select id="sort-select" class="sort-select">
+                            <option value="date-desc">Date (newest)</option>
+                            <option value="date-asc">Date (oldest)</option>
+                            <option value="amount-desc">Amount (highest)</option>
+                            <option value="amount-asc">Amount (lowest)</option>
+                            <option value="description-asc">Description (A-Z)</option>
+                            <option value="description-desc">Description (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Search Results Count -->
+                <p id="search-results" class="search-results" role="status" aria-live="polite">
+                    <span id="results-count">0</span> transactions found
+                </p>
+
+                <!-- Records Table (Desktop) -->
+                <div class="card" id="table-container">
+                    <table class="records-table" id="records-table" aria-describedby="records-heading">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="records-tbody">
+                            <!-- Records will be rendered here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Records Cards (Mobile) -->
+                <div class="records-cards" id="records-cards" aria-label="Transaction records">
+                    <!-- Cards will be rendered here by JavaScript -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="card center" id="empty-state" hidden>
+                    <span class="empty-icon" aria-hidden="true">📝</span>
+                    <p>No transactions yet. <a href="add-transaction.html">Add your first transaction</a></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+  
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Edit Transaction</h2>
+                <button type="button" class="modal-close" aria-label="Close modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form" class="transaction-form" novalidate>
+                    <input type="hidden" id="edit-id" name="id">
+                    
+                    <div class="form-group">
+                        <label for="edit-description" class="form-label">
+                            Description <span class="required" aria-hidden="true">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="edit-description" 
+                            name="description" 
+                            class="form-input" 
+                            required
+                            aria-describedby="edit-description-error"
+                        >
+                        <p id="edit-description-error" class="form-error" role="alert" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-amount" class="form-label">
+                                Amount (£) <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="edit-amount" 
+                                name="amount" 
+                                class="form-input" 
+                                required
+                                aria-describedby="edit-amount-error"
+                                inputmode="decimal"
+                            >
+                            <p id="edit-amount-error" class="form-error" role="alert" aria-live="polite"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-date" class="form-label">
+                                Date <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="date" 
+                                id="edit-date" 
+                                name="date" 
+                                class="form-input" 
+                                required
+                                aria-describedby="edit-date-error"
+                            >
+                            <p id="edit-date-error" class="form-error" role="alert" aria-live="polite"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-category" class="form-label">
+                            Category <span class="required" aria-hidden="true">*</span>
+                        </label>
+                        <select 
+                            id="edit-category" 
+                            name="category" 
+                            class="form-input form-select" 
+                            required
+                            aria-describedby="edit-category-error"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="Food">Food</option>
+                            <option value="Books">Books</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Fees">Fees</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <p id="edit-category-error" class="form-error" role="alert" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="modal-cancel">Cancel</button>
+                <button type="button" class="btn btn-primary" id="modal-save">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal" role="alertdialog" aria-labelledby="delete-title" aria-describedby="delete-message" aria-modal="true" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2 id="delete-title">Confirm Delete</h2>
+            </div>
+            <div class="modal-body">
+                <p id="delete-message">Are you sure you want to delete this transaction? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="delete-cancel">Cancel</button>
+                <button type="button" class="btn btn-danger" id="delete-confirm">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

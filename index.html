@@ -3,9 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home- stuFi App</title>
+    <meta name="description" content="stuFi - A responsive web app for managing student budgets and transactions">
+    <meta name="theme-color" content="#2563eb">
+    <title>stuFi - Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+     <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="records.html" class="nav-link">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <section aria-labelledby="dashboard-heading">
+            <div class="container">
+                <h1 id="dashboard-heading">Dashboard</h1>
+                
+                <div class="grid">
+                    <div class="card flex">
+                        <span aria-hidden="true">💵</span>
+                        <div>
+                            <span>Total Spent</span>
+                            <span id="total-spent">£0.00</span>
+                        </div>
+                    </div>
+                    <div class="card flex">
+                        <span aria-hidden="true">📊</span>
+                        <div>
+                            <span>Records</span>
+                            <span id="record-count">0</span>
+                        </div>
+                    </div>
+                    <div class="card flex">
+                        <span aria-hidden="true">🏷️</span>
+                        <div>
+                            <span>Top Category</span>
+                            <span id="top-category">—</span>
+                        </div>
+                    </div>
+                    <div class="card flex">
+                        <span aria-hidden="true">📈</span>
+                        <div>
+                            <span>7-Day Trend</span>
+                            <span id="seven-day-trend">£0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 id="cap-heading">Spending Cap</h2>
+                    <div role="progressbar" aria-labelledby="cap-heading" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar">
+                            <div id="cap-progress-fill"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span id="cap-current">£0.00</span>
+                            <span id="cap-target">of £500.00</span>
+                        </div>
+                    </div>
+                    <p id="cap-status" role="status">Set your spending cap in Settings</p>
+                </div>
+
+                <div class="card">
+                    <h2>Last 7 Days</h2>
+                    <div class="chart" id="trend-chart" aria-label="Bar chart showing spending over the last 7 days">
+                        <div data-day="Mon"><div></div><span>Mon</span></div>
+                        <div data-day="Tue"><div></div><span>Tue</span></div>
+                        <div data-day="Wed"><div></div><span>Wed</span></div>
+                        <div data-day="Thu"><div></div><span>Thu</span></div>
+                        <div data-day="Fri"><div></div><span>Fri</span></div>
+                        <div data-day="Sat"><div></div><span>Sat</span></div>
+                        <div data-day="Sun"><div></div><span>Sun</span></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Category Breakdown</h2>
+                    <div id="category-breakdown">
+                        <div class="row">
+                            <span>Food</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="row">
+                            <span>Books</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="row">
+                            <span>Transport</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="row">
+                            <span>Entertainment</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="row">
+                            <span>Fees</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="row">
+                            <span>Other</span>
+                            <div class="bar"><div style="width: 0%"></div></div>
+                            <span>£0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Quick Actions</h2>
+                    <div class="actions">
+                        <a href="add-transaction.html" class="btn btn-primary">➕ Add Transaction</a>
+                        <a href="records.html" class="btn btn-secondary">📋 View Records</a>
+                        <a href="settings.html" class="btn btn-secondary">⚙️ Settings</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/app.js"></script>
 </body>
 </html>

@@ -3,9 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tests - stuFi app</title>
+    <meta name="description" content="stuFi Test Suite - Run validation and regex tests">
+    <title>Test Suite - stuFi</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <style>
+        .test-results {
+            margin-top: var(--spacing-6);
+        }
+        
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .test-table th,
+        .test-table td {
+            padding: var(--spacing-3) var(--spacing-4);
+            text-align: left;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        
+        .test-table th {
+            background-color: var(--color-gray-100);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .test-table tr.pass {
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        
+        .test-table tr.fail {
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        
+        .test-status {
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        .test-status.pass {
+            color: var(--color-success);
+        }
+        
+        .test-status.fail {
+            color: var(--color-danger);
+        }
+        
+        .test-summary {
+            margin-top: var(--spacing-6);
+            padding: var(--spacing-4);
+            background-color: var(--color-gray-100);
+            border-radius: var(--radius-lg);
+        }
+        
+        .test-summary h3 {
+            margin-bottom: var(--spacing-2);
+        }
+        
+        .run-tests-btn {
+            margin-bottom: var(--spacing-6);
+        }
+    </style>
 </head>
 <body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="records.html" class="nav-link">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Test Suite</h1>
+                
+                <p class="about-description">
+                    This page runs automated tests for the stuFi application's validation functions and regex patterns.
+                </p>
+                
+                <button type="button" class="btn btn-primary run-tests-btn" id="run-tests">
+                    Run All Tests
+                </button>
+                
+                <div class="test-results" id="test-results">
+                    <!-- Test results will be rendered here -->
+                </div>
+                
+                <div class="test-summary" id="test-summary" hidden>
+                    <h3>Summary</h3>
+                    <p><span id="pass-count">0</span> passed, <span id="fail-count">0</span> failed</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Test Script -->
+    <script type="module">
+        // Import validators (will be implemented in M3)
+        // import * as validators from './scripts/validators.js';
+        
+        // Test runner
+        function runTests() {
+            const results = [];
+            
+            // Description Validator Tests
+            results.push(...testDescriptionValidator());
+            
+            // Amount Validator Tests
+            results.push(...testAmountValidator());
+            
+            // Date Validator Tests
+            results.push(...testDateValidator());
+            
+            // Category Validator Tests
+            results.push(...testCategoryValidator());
+            
+            // Duplicate Word Detector Tests (Advanced Regex)
+            results.push(...testDuplicateWordDetector());
+            
+            // Safe Regex Compiler Tests
+            results.push(...testSafeRegexCompiler());
+            
+            return results;
+        }
+        
+        function testDescriptionValidator() {
+            const tests = [
+                { input: 'Lunch at cafeteria', expected: true },
+                { input: 'Coffee', expected: true },
+                { input: ' leading space', expected: false },
+                { input: 'trailing space ', expected: false },
+                { input: 'double  space', expected: false },
+                { input: '', expected: false },
+                { input: '   ', expected: false },
+                { input: 'A', expected: true },
+                { input: 'Valid description here', expected: true }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Description Validator',
+                input: `"${t.input}"`,
+                expected: t.expected ? 'valid' : 'invalid',
+                actual: 'pending', // Will be updated when validators are implemented
+                pass: 'pending'
+            }));
+        }
+        
+        function testAmountValidator() {
+            const tests = [
+                { input: '12.50', expected: true },
+                { input: '0', expected: true },
+                { input: '100', expected: true },
+                { input: '0.99', expected: true },
+                { input: '-5', expected: false },
+                { input: '12.500', expected: false },
+                { input: 'abc', expected: false },
+                { input: '12.', expected: true },
+                { input: '.50', expected: false },
+                { input: '00100', expected: false }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Amount Validator',
+                input: `"${t.input}"`,
+                expected: t.expected ? 'valid' : 'invalid',
+                actual: 'pending',
+                pass: 'pending'
+            }));
+        }
+        
+        function testDateValidator() {
+            const tests = [
+                { input: '2026-09-29', expected: true },
+                { input: '2026-01-01', expected: true },
+                { input: '2026-12-31', expected: true },
+                { input: '2026-13-01', expected: false },
+                { input: '2026-00-15', expected: false },
+                { input: '2026-06-32', expected: false },
+                { input: '25-09-29', expected: false },
+                { input: '2026/09/29', expected: false },
+                { input: '2026-9-29', expected: false },
+                { input: '2026-09-9', expected: false }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Date Validator',
+                input: `"${t.input}"`,
+                expected: t.expected ? 'valid' : 'invalid',
+                actual: 'pending',
+                pass: 'pending'
+            }));
+        }
+        
+        function testCategoryValidator() {
+            const tests = [
+                { input: 'Food', expected: true },
+                { input: 'Fast Food', expected: true },
+                { input: 'Fast-Food', expected: true },
+                { input: 'Food123', expected: false },
+                { input: 'food', expected: true },
+                { input: '123', expected: false },
+                { input: 'Food!', expected: false },
+                { input: '', expected: false },
+                { input: 'A B C', expected: true }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Category Validator',
+                input: `"${t.input}"`,
+                expected: t.expected ? 'valid' : 'invalid',
+                actual: 'pending',
+                pass: 'pending'
+            }));
+        }
+        
+        function testDuplicateWordDetector() {
+            const tests = [
+                { input: 'the the', expected: true, description: 'detects "the the"' },
+                { input: 'coffee coffee', expected: true, description: 'detects "coffee coffee"' },
+                { input: 'the cat', expected: false, description: 'no duplicate' },
+                { input: 'The the', expected: true, description: 'case insensitive' },
+                { input: 'a a a', expected: true, description: 'multiple duplicates' },
+                { input: 'no duplicate here', expected: false, description: 'no duplicate' }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Duplicate Word Detector (Advanced)',
+                input: `"${t.input}"`,
+                expected: t.expected ? 'detect duplicate' : 'no duplicate',
+                actual: 'pending',
+                pass: 'pending'
+            }));
+        }
+        
+        function testSafeRegexCompiler() {
+            const tests = [
+                { input: '/coffee|tea/', expected: 'valid regex', description: 'valid pattern' },
+                { input: '/[a-z]+/', expected: 'valid regex', description: 'valid character class' },
+                { input: '/[/', expected: 'null (invalid)', description: 'unclosed bracket' },
+                { input: '/(unclosed/', expected: 'null (invalid)', description: 'unclosed group' },
+                { input: '/*/', expected: 'null (invalid)', description: 'invalid quantifier' }
+            ];
+            
+            return tests.map(t => ({
+                category: 'Safe Regex Compiler',
+                input: t.input,
+                expected: t.expected,
+                actual: 'pending',
+                pass: 'pending'
+            }));
+        }
+        
+        function renderResults(results) {
+            const container = document.getElementById('test-results');
+            const summary = document.getElementById('test-summary');
+            
+            let html = `
+                <table class="test-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Input</th>
+                            <th>Expected</th>
+                            <th>Actual</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            let passCount = 0;
+            let failCount = 0;
+            
+            results.forEach(r => {
+                const passClass = r.pass === true ? 'pass' : (r.pass === false ? 'fail' : '');
+                const statusText = r.pass === true ? '✓ PASS' : (r.pass === false ? '✗ FAIL' : '⏳ PENDING');
+                const statusClass = r.pass === true ? 'pass' : (r.pass === false ? 'fail' : '');
+                
+                if (r.pass === true) passCount++;
+                if (r.pass === false) failCount++;
+                
+                html += `
+                    <tr class="${passClass}">
+                        <td>${r.category}</td>
+                        <td><code>${r.input}</code></td>
+                        <td>${r.expected}</td>
+                        <td>${r.actual}</td>
+                        <td class="test-status ${statusClass}">${statusText}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+            
+            document.getElementById('pass-count').textContent = passCount;
+            document.getElementById('fail-count').textContent = failCount;
+            summary.hidden = false;
+        }
+        
+        // Event listener
+        document.getElementById('run-tests').addEventListener('click', () => {
+            const results = runTests();
+            renderResults(results);
+        });
+        
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const results = runTests();
+            renderResults(results);
+        });
+    </script>
 </body>
 </html>

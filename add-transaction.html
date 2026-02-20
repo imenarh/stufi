@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="stuFi - Add a new transaction to track your spending">
+    <meta name="theme-color" content="#2563eb">
+    <title>Add Transaction - stuFi</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="records.html" class="nav-link">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link active" aria-current="page">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- Add Transaction Section -->
+        <section class="section form-section" aria-labelledby="form-heading">
+            <div class="container">
+                <h1 id="form-heading" class="section-title">Add Transaction</h1>
+                
+                <form id="transaction-form" class="card" novalidate>
+                    <input type="hidden" id="transaction-id" name="id">
+                    
+                    <div class="form-group">
+                        <label for="description" class="form-label">
+                            Description <span class="required" aria-hidden="true">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="description" 
+                            name="description" 
+                            class="form-input" 
+                            required
+                            aria-describedby="description-error description-hint"
+                            autocomplete="off"
+                            placeholder="e.g., Lunch at cafeteria"
+                        >
+                        <p id="description-error" class="form-error" role="alert" aria-live="polite"></p>
+                        <p id="description-hint" class="form-hint">No leading/trailing spaces, no double spaces</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="amount" class="form-label">
+                                Amount (£) <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="amount" 
+                                name="amount" 
+                                class="form-input" 
+                                required
+                                aria-describedby="amount-error amount-hint"
+                                inputmode="decimal"
+                                placeholder="0.00"
+                            >
+                            <p id="amount-error" class="form-error" role="alert" aria-live="polite"></p>
+                            <p id="amount-hint" class="form-hint">Positive number, max 2 decimal places</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date" class="form-label">
+                                Date <span class="required" aria-hidden="true">*</span>
+                            </label>
+                            <input 
+                                type="date" 
+                                id="date" 
+                                name="date" 
+                                class="form-input" 
+                                required
+                                aria-describedby="date-error"
+                            >
+                            <p id="date-error" class="form-error" role="alert" aria-live="polite"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category" class="form-label">
+                            Category <span class="required" aria-hidden="true">*</span>
+                        </label>
+                        <select 
+                            id="category" 
+                            name="category" 
+                            class="form-input form-select" 
+                            required
+                            aria-describedby="category-error"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="Food">Food</option>
+                            <option value="Books">Books</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Fees">Fees</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <p id="category-error" class="form-error" role="alert" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="records.html" class="btn btn-secondary" id="cancel-btn">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            Add Transaction
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Recent Transactions Preview -->
+                <div class="card">
+                    <h2 class="small">Recent Transactions</h2>
+                    <div id="recent-list" class="recent-list">
+                        <!-- Will be populated by JavaScript -->
+                        <p class="no-recent">No recent transactions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

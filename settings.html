@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="stuFi Settings - Configure spending cap, currency rates, categories, and data management">
+    <meta name="theme-color" content="#2563eb">
+    <title>Settings - stuFi</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="records.html" class="nav-link">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link active" aria-current="page">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- Settings Section -->
+        <section class="section settings-section" aria-labelledby="settings-heading">
+            <div class="container">
+                <h1 id="settings-heading" class="section-title">Settings</h1>
+                
+                <div class="settings-grid">
+                    <!-- Spending Cap -->
+                    <div class="card">
+                        <h2>Spending Cap</h2>
+                        <p class="setting-description">Set a monthly spending limit to track your budget.</p>
+                        <div class="setting-row">
+                            <label for="spending-cap" class="form-label">Monthly Limit (£)</label>
+                            <input 
+                                type="text" 
+                                id="spending-cap" 
+                                class="form-input" 
+                                value="500.00"
+                                inputmode="decimal"
+                                aria-describedby="cap-hint"
+                            >
+                            <p id="cap-hint" class="form-hint">Enter a positive amount</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="save-cap-btn">
+                            Save Cap
+                        </button>
+                    </div>
+
+                    <!-- Currency Settings -->
+                    <div class="card">
+                        <h2>Currency Rates</h2>
+                        <p class="setting-description">Set manual exchange rates for currency conversion.</p>
+                        <p class="setting-hint">Base currency: GBP (£)</p>
+                        <div class="currency-rates">
+                            <div class="setting-row">
+                                <label for="rate-usd" class="form-label">USD Rate ($)</label>
+                                <input 
+                                    type="text" 
+                                    id="rate-usd" 
+                                    class="form-input" 
+                                    value="1.27"
+                                    inputmode="decimal"
+                                >
+                            </div>
+                            <div class="setting-row">
+                                <label for="rate-eur" class="form-label">EUR Rate (€)</label>
+                                <input 
+                                    type="text" 
+                                    id="rate-eur" 
+                                    class="form-input" 
+                                    value="1.17"
+                                    inputmode="decimal"
+                                >
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="save-rates-btn">
+                            Save Rates
+                        </button>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="card">
+                        <h2>Categories</h2>
+                        <p class="setting-description">Manage transaction categories.</p>
+                        <div class="categories-list" id="categories-list">
+                            <span class="category-tag">Food <button type="button" class="remove-tag" aria-label="Remove Food category">&times;</button></span>
+                            <span class="category-tag">Books <button type="button" class="remove-tag" aria-label="Remove Books category">&times;</button></span>
+                            <span class="category-tag">Transport <button type="button" class="remove-tag" aria-label="Remove Transport category">&times;</button></span>
+                            <span class="category-tag">Entertainment <button type="button" class="remove-tag" aria-label="Remove Entertainment category">&times;</button></span>
+                            <span class="category-tag">Fees <button type="button" class="remove-tag" aria-label="Remove Fees category">&times;</button></span>
+                            <span class="category-tag">Other <button type="button" class="remove-tag" aria-label="Remove Other category">&times;</button></span>
+                        </div>
+                        <div class="add-category">
+                            <input 
+                                type="text" 
+                                id="new-category" 
+                                class="form-input" 
+                                placeholder="New category name"
+                                aria-describedby="category-hint"
+                            >
+                            <button type="button" class="btn btn-secondary" id="add-category-btn">
+                                Add
+                            </button>
+                        </div>
+                        <p id="category-hint" class="form-hint">Letters, spaces, and hyphens only</p>
+                    </div>
+
+                    <!-- Import/Export -->
+                    <div class="card">
+                        <h2>Data Management</h2>
+                        <p class="setting-description">Export, import, or clear your transaction data.</p>
+                        <div class="data-actions">
+                            <button type="button" class="btn btn-secondary" id="export-json-btn">
+                                <span aria-hidden="true">📤</span> Export JSON
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="export-csv-btn">
+                                <span aria-hidden="true">📄</span> Export CSV
+                            </button>
+                            <div class="import-container">
+                                <label for="import-file" class="btn btn-secondary">
+                                    <span aria-hidden="true">📥</span> Import JSON
+                                </label>
+                                <input 
+                                    type="file" 
+                                    id="import-file" 
+                                    accept=".json"
+                                    hidden
+                                >
+                            </div>
+                            <button type="button" class="btn btn-danger" id="clear-data-btn">
+                                <span aria-hidden="true">🗑️</span> Clear All Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Info -->
+                <div class="card margin-top">
+                    <h2>Storage Information</h2>
+                    <div class="storage-stats">
+                        <div class="storage-stat">
+                            <span class="storage-label">Records stored:</span>
+                            <span class="storage-value" id="records-stored">0</span>
+                        </div>
+                        <div class="storage-stat">
+                            <span class="storage-label">Storage used:</span>
+                            <span class="storage-value" id="storage-used">0 KB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Clear Data Confirmation Modal -->
+    <div id="clear-modal" class="modal" role="alertdialog" aria-labelledby="clear-title" aria-describedby="clear-message" aria-modal="true" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2 id="clear-title">Clear All Data</h2>
+            </div>
+            <div class="modal-body">
+                <p id="clear-message">Are you sure you want to delete all transactions and reset settings? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="clear-cancel">Cancel</button>
+                <button type="button" class="btn btn-danger" id="clear-confirm">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About stuFi - Learn about the Student Finance Tracker app features and contact information">
+    <meta name="theme-color" content="#2563eb">
+    <title>About - stuFi</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Live region for announcements -->
+    <div id="live-region" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-region" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="site-title">
+                <img src="./assets/icons/stuFi.svg" alt="website logo"
+                    height="36" width="36"/>
+                <span>stuFi</span>
+            </a>
+            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+                <div class="container">
+                    <ul class="nav-list" role="list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link active" aria-current="page">About</a></li>
+                        <li><a href="records.html" class="nav-link">Records</a></li>
+                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                        <li><a href="settings.html" class="nav-link">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        
+        <!-- About Section -->
+        <section class="section about-section" aria-labelledby="about-heading">
+            <div class="container">
+                <h1 id="about-heading" class="section-title">About stuFi</h1>
+                <div class="card">
+                    <div class="about-text">
+                        <p class="about-description">
+                            <strong>stuFi</strong> (Student Finance) is a responsive web application designed to help students manage their budgets, track spending, and develop better financial habits.
+                        </p>
+                        <p class="about-description">
+                            Built with vanilla HTML, CSS, and JavaScript, stuFi demonstrates modern web development practices including semantic HTML, mobile-first responsive design, accessibility features, and modular JavaScript architecture.
+                        </p>
+                        
+                        <h2>Key Features</h2>
+                        <ul class="feature-list">
+                            <li>Track income and expenses with customizable categories</li>
+                            <li>Set spending caps with real-time ARIA live alerts</li>
+                            <li>Search transactions using powerful regex patterns</li>
+                            <li>View spending trends and statistics on the dashboard</li>
+                            <li>Export/import data as JSON with validation</li>
+                            <li>Currency conversion support (GBP, USD, EUR)</li>
+                            <li>Fully keyboard-navigable interface</li>
+                            <li>Screen reader compatible with ARIA live regions</li>
+                        </ul>
+                        
+                        <h2>Technology</h2>
+                        <ul class="feature-list">
+                            <li>Semantic HTML5 with proper landmarks and headings</li>
+                            <li>Mobile-first CSS with Flexbox and media queries</li>
+                            <li>Vanilla JavaScript with ES modules</li>
+                            <li>localStorage for data persistence</li>
+                            <li>Regular expressions for validation and search</li>
+                            <li>WCAG 2.1 AA accessibility compliance</li>
+                        </ul>
+                        
+                        <h2>Contact</h2>
+                        <ul class="contact-list">
+                            <li>
+                                <span aria-hidden="true">📧</span>
+                                <a href="mailto:student@example.com">student@example.com</a>
+                            </li>
+                            <li>
+                                <span aria-hidden="true">🐙</span>
+                                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                                    GitHub Repository
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>2026 stuFi - Student Finance Tracker</p>
+            <p class="footer-links">
+                <a href="https://github.com/imenarh/student-finance-tracker" target="_blank" rel="noopener noreferrer">
+                    View on GitHub
+                </a>
+                <span class="separator" aria-hidden="true">●</span>
+                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                    Watch demo
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

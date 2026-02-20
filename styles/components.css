@@ -1,0 +1,62 @@
+/* Minimal component styles - only for tests.html */
+/* Most styles are now in main.css */
+
+.test-results {
+    margin-top: 32px;
+}
+
+.test-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.test-table th,
+.test-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.test-table th {
+    background: var(--color-bg);
+    font-weight: 600;
+}
+
+.test-table tr.pass {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.test-table tr.fail {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.test-status {
+    font-weight: 600;
+}
+
+.test-status.pass {
+    color: var(--color-success);
+}
+
+.test-status.fail {
+    color: var(--color-danger);
+}
+
+.test-summary {
+    margin-top: 32px;
+    padding: 16px;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+}
+
+.test-summary h3 {
+    margin-bottom: 8px;
+}
+
+.run-tests-btn {
+    margin-bottom: 32px;
+}
