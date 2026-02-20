@@ -117,7 +117,7 @@
       "USD": 1.27,
       "EUR": 1.17
     },
-    "spendingCap": 500,
+    "spendingCap": 250000,
     "categories": ["Food", "Books", "Transport", "Entertainment", "Fees", "Other"]
   }
 }
