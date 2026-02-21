@@ -45,6 +45,15 @@ Open `index.html` in your browser.
 - Responsive design (mobile, tablet, desktop)
 - ARIA live regions for screen readers
 
+## Wireframes
+
+- [Home(dashboard)](./assets/images/dashboard.png)
+- [About Page](./assets/images/about.png)
+- [Records Page](./assets/images/records.png)
+- [Add transaction](./assets/images/add-transaction.png)
+- [Settings page](./assets/images/settings.png)
+- [Tests page](./assets/images/tests.png)
+
 ---
 
 ## Regex Catalog
@@ -94,7 +103,7 @@ Open `index.html` in your browser.
 - Labels bound to all form inputs
 
 ### Keyboard Support
-- All interactive elements focusable via `Tab`
+- All interactive elements focusable via `Tab` key
 - Visible focus indicators using `:focus-visible` (3px solid outline)
 - Focus trap in modals (Tab cycles within modal)
 - Focus returns to trigger element when modal closes
