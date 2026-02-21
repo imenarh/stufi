@@ -6,6 +6,8 @@
     var settings = {};
 
     // Initialize
+    var previousFocus = null;
+
     function init() {
         settings = Settings.load();
         populateForm();
@@ -315,7 +317,15 @@
     function showModal(id) {
         var modal = document.getElementById(id);
         if (modal) {
+            previousFocus = document.activeElement;
             modal.hidden = false;
+            
+            var firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
+            
+            document.addEventListener('keydown', trapFocus);
         }
     }
 
@@ -324,6 +334,34 @@
         var modal = document.getElementById(id);
         if (modal) {
             modal.hidden = true;
+            document.removeEventListener('keydown', trapFocus);
+            
+            if (previousFocus && previousFocus.focus) {
+                previousFocus.focus();
+            }
+        }
+    }
+
+    // Trap focus in modal
+    function trapFocus(e) {
+        if (e.key !== 'Tab') return;
+        
+        var modal = document.querySelector('.modal:not([hidden])');
+        if (!modal) return;
+        
+        var focusables = modal.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        
+        if (focusables.length === 0) return;
+        
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
         }
     }
 

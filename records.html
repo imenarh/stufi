@@ -26,16 +26,17 @@
                     height="36" width="36"/>
                 <span>stuFi</span>
             </a>
-            <nav id="main-nav" class="main-nav" aria-label="Main navigation">
-                <div class="container">
-                    <ul class="nav-list" role="list">
-                        <li><a href="index.html" class="nav-link">Home</a></li>
-                        <li><a href="about.html" class="nav-link">About</a></li>
-                        <li><a href="records.html" class="nav-link active" aria-current="page">Records</a></li>
-                        <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
-                        <li><a href="settings.html" class="nav-link">Settings</a></li>
-                    </ul>
-                </div>
+            <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+                <img src="./assets/icons/menu.svg" alt="" width="24" height="24">
+            </button>
+            <nav id="main-nav" aria-label="Main navigation">
+                <ul class="nav-list" role="list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="records.html" class="nav-link active" aria-current="page">Records</a></li>
+                    <li><a href="add-transaction.html" class="nav-link">Add Transaction</a></li>
+                    <li><a href="settings.html" class="nav-link">Settings</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -122,7 +123,7 @@
                     View on GitHub
                 </a>
                 <span class="separator" aria-hidden="true">●</span>
-                <a href="https://loom.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://youtu.be/3B0QUwxS82A" target="_blank" rel="noopener noreferrer">
                     Watch demo
                 </a>
             </p>
@@ -135,5 +136,13 @@
     <script src="scripts/search.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/records.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var nav = document.getElementById('main-nav');
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            nav.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>

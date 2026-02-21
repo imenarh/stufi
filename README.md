@@ -4,27 +4,28 @@ A responsive web application for tracking student budgets and transactions, buil
 
 **Live website**: [GitHub Pages URL](https://imenarh.github.io/stufi/index.html)
 
-**Video Demo**: [Loom URL]
+**Video Demo**: [Video Demo](https://youtu.be/3B0QUwxS82A)
 
 ---
 
 ## Overview
 
-**stuFi** helps students track their spending with a clean, accessible interface. Features include transaction management, spending caps, category breakdowns, and regex-powered search.
+**stuFi** helps students track their spending with a clean, accessible interface. Features include transaction management, spending caps, regex-powered search, and data import/export.
+
+**Currency**: RWF (Rwandan Franc) is the base currency.
 
 ---
 
 ## Setup Guide
 
 ```bash
-# Clone the repository
 git clone https://github.com/imenarh/stufi
 cd stufi
 ```
 
 Open `index.html` in your browser.
 
-> To load sample data: Settings → Import JSON → select `seed.json`
+> To load sample data: navigate to Settings → Import JSON → select `seed.json`
 
 ---
 
@@ -32,15 +33,17 @@ Open `index.html` in your browser.
 
 - Add, edit, and delete transactions
 - Dashboard with spending stats and 7-day trend chart
-- Spending cap with progress indicator
-- Category breakdown with visual bars
+- Spending cap with progress indicator and ARIA alerts
 - Regex-powered search with match highlighting
 - Sort by date, description, or amount
-- Currency conversion (base + 2 others)
+- Customizable categories (persisted in localStorage)
+- Currency conversion rates (USD, EUR)
 - Auto-save to localStorage
-- JSON import/export with validation
-- Fully keyboard-navigable
+- JSON/CSV export with validation
+- JSON import with validation
+- Fully keyboard-navigable with focus trap in modals
 - Responsive design (mobile, tablet, desktop)
+- ARIA live regions for screen readers
 
 ---
 
@@ -51,8 +54,8 @@ Open `index.html` in your browser.
 | Field | Pattern | Valid | Invalid |
 |-------|---------|-------|---------|
 | Description | `/^\S(?:.*\S)?$/` | `"Lunch at cafe"` | `" leading"`, `"trailing "` |
-| Amount | `/^(0\|[1-9]\d*)(\.\d{1,2})?$/` | `"12.50"`, `"0"`, `"100"` | `"-5"`, `"12.500"` |
-| Date | `/^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])$/` | `"2026-02-15"` | `"2026-13-01"` |
+| Amount | `/^(0|[1-9]\d*)(\.\d{1,2})?$/` | `"3500"`, `"0"`, `"12500.50"` | `"-5"`, `"12.500"` |
+| Date | `/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/` | `"2026-02-15"` | `"2026-13-01"` |
 | Category | `/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/` | `"Food"`, `"Fast Food"` | `"Food123"` |
 
 ### Advanced Regex (Back-reference)
@@ -65,9 +68,9 @@ Open `index.html` in your browser.
 
 | Pattern | Purpose |
 |---------|---------|
-| `/coffee\|tea/i` | Find beverage transactions |
+| `/coffee|tea/i` | Find beverage transactions |
 | `/\.\d{2}$/` | Find amounts with cents |
-| `/^\d{3,}/` | Find amounts ≥ 100 |
+| `/^\d{5,}/` | Find amounts ≥ 10,000 |
 
 ---
 
@@ -78,7 +81,7 @@ Open `index.html` in your browser.
 | `Tab` | Move focus forward |
 | `Shift + Tab` | Move focus backward |
 | `Enter` / `Space` | Activate focused element |
-| `Escape` | Close modal / cancel edit |
+| `Escape` | Close modal |
 
 ---
 
@@ -91,14 +94,16 @@ Open `index.html` in your browser.
 - Labels bound to all form inputs
 
 ### Keyboard Support
-- All interactive elements focusable
-- Visible focus indicators (3px outline)
-- No keyboard traps
+- All interactive elements focusable via `Tab`
+- Visible focus indicators using `:focus-visible` (3px solid outline)
+- Focus trap in modals (Tab cycles within modal)
+- Focus returns to trigger element when modal closes
 
 ### ARIA
-- Live regions for dynamic updates (`aria-live`)
+- Live regions for dynamic updates (`aria-live="polite"` and `aria-live="assertive"`)
 - Progress bar with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
 - Form errors linked via `aria-describedby`
+- Modal with `role="alertdialog"`, `aria-modal="true"`
 
 ### Contrast
 - Text contrast ≥ 4.5:1 (WCAG AA)
@@ -127,20 +132,30 @@ Open `index.html` in your browser.
 
 ```
 student-finance-tracker/
-├── index.html
-├── about.html
-├── records.html
-├── add-transaction.html
-├── settings.html
-├── tests.html
-├── seed.json
+├── index.html              # Dashboard
+├── about.html              # About page
+├── records.html            # Transaction list with search/sort
+├── add-transaction.html    # Add/Edit transaction form
+├── settings.html           # Settings (cap, categories, import/export)
+├── tests.html              # Validation test suite
+├── seed.json               # Sample data for import
+├── README.md
 ├── styles/
-│   ├── main.css
-│   └── components.css
+│   ├── main.css            # Base styles, layout, components
+│   └── components.css      # Page-specific styles
 ├── scripts/
-│   └── validators.js
+│   ├── storage.js          # localStorage operations
+│   ├── settings.js         # Settings load/save
+│   ├── validators.js       # Regex validators + test runner
+│   ├── state.js            # App state management
+│   ├── search.js           # Regex search and highlight
+│   ├── ui.js               # UI rendering
+│   ├── records.js          # Records page logic
+│   ├── dashboard.js        # Dashboard stats and chart
+│   ├── settings-page.js    # Settings page logic
+│   └── add-transaction.js  # Add/Edit transaction logic
 └── assets/
-    └── icons/
+    └── icons/              # SVG icons
 ```
 
 ---
@@ -149,9 +164,9 @@ student-finance-tracker/
 
 ```json
 {
-  "id": "txn_0001",
+  "id": "txn_abc12345",
   "description": "Lunch at cafeteria",
-  "amount": 12.50,
+  "amount": 3500.00,
   "category": "Food",
   "date": "2026-02-15",
   "createdAt": "2026-02-15T10:30:00.000Z",
@@ -159,6 +174,29 @@ student-finance-tracker/
 }
 ```
 
-**Default Categories:** Food, Books, Transport, Entertainment, Fees, Other
+    "categories": Food, Books, Transport, Entertainment, Fees, Other
+
+**Settings:**
+```json
+{
+  "spendingCap": 500000,
+  "categories": ["Food", "Books", "Transport", "Entertainment", "Fees", "Other"],
+  "rates": { "USD": 0.00078, "EUR": 0.00072 }
+}
+```
+
+---
+
+## Milestones
+
+| Milestone | Weight | Description |
+|-----------|--------|-------------|
+| M1 | 10% | Spec & Wireframes |
+| M2 | 10% | Semantic HTML & Base CSS |
+| M3 | 15% | Forms & Regex Validation |
+| M4 | 20% | Render + Sort + Regex Search |
+| M5 | 15% | Stats + Cap/Targets |
+| M6 | 15% | Persistence + Import/Export |
+| M7 | 15% | Polish & A11y Audit |
 
 ---

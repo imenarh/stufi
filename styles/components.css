@@ -25,6 +25,12 @@
     align-items: start;
     gap: 16px;
     padding: 20px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stat-icon {
@@ -96,7 +102,11 @@
     max-width: 40px;
     background: var(--color-primary);
     border-radius: var(--radius) var(--radius) 0 0;
-    transition: height 0.3s ease;
+    transition: height 0.3s ease, background 0.2s ease;
+}
+
+.chart > div:hover > div {
+    background: #028a49;
 }
 
 .chart span {
@@ -143,6 +153,12 @@
     box-shadow: 0 0 0 3px rgba(2, 159, 85, 0.1);
 }
 
+.search-input:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
 .search-help {
     margin-top: 8px;
     font-size: 0.75rem;
@@ -179,6 +195,12 @@
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(2, 159, 85, 0.1);
+}
+
+.sort-select:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    box-shadow: none;
 }
 
 .search-results {
@@ -364,6 +386,11 @@ mark {
     background: var(--color-bg);
     border-radius: 20px;
     font-size: 0.875rem;
+    transition: background 0.2s ease;
+}
+
+.category-tag:hover {
+    background: var(--color-border);
 }
 
 .remove-tag {
@@ -379,10 +406,18 @@ mark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
-.remove-tag:hover {
+.remove-tag:hover,
+.remove-tag:focus {
     color: var(--color-danger);
+}
+
+.remove-tag:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .add-category {
