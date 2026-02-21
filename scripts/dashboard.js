@@ -14,12 +14,7 @@ var Dashboard = (function() {
     }
 
     function loadSettings() {
-        try {
-            var data = localStorage.getItem('stufi:settings');
-            settings = data ? JSON.parse(data) : { spendingCap: 500 };
-        } catch (e) {
-            settings = { spendingCap: 500 };
-        }
+        settings = Settings.load();
     }
 
     // Calculate stats
@@ -94,7 +89,7 @@ var Dashboard = (function() {
 
     // Render cap progress
     function renderCap(stats) {
-        var cap = settings.spendingCap || 500;
+        var cap = settings.spendingCap || 500000;
         var current = stats.total;
         var percentage = cap > 0 ? (current / cap) * 100 : 0;
 

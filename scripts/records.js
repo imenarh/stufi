@@ -12,19 +12,47 @@
         var pattern = searchInput ? searchInput.value : '';
         currentSort = sortSelect ? sortSelect.value : 'date-desc';
 
-        // Get records
         var records = State.getRecords();
-
-        // Filter and sort
         var filtered = Search.filterRecords(records, pattern);
         var sorted = State.sortRecords(filtered, currentSort);
         var regex = Search.compileRegex(pattern);
 
-        // Render
         UI.renderTable(sorted, regex);
         UI.renderCards(sorted, regex);
         UI.updateCount(sorted.length, records.length);
         UI.toggleEmpty(records.length > 0);
+    }
+
+    function handleAction(e) {
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+
+        var action = btn.getAttribute('data-action');
+        var id = btn.getAttribute('data-id');
+
+        if (action === 'edit') {
+            window.location.href = 'add-transaction.html?edit=' + encodeURIComponent(id);
+        } else if (action === 'delete') {
+            if (confirm('Delete this transaction?')) {
+                deleteRecord(id);
+            }
+        }
+    }
+
+    function deleteRecord(id) {
+        var records = Storage.loadRecords();
+        var filtered = records.filter(function(r) {
+            return r.id !== id;
+        });
+        Storage.saveRecords(filtered);
+        State.init();
+        render();
+        announce('Transaction deleted');
+    }
+
+    function announce(message) {
+        var region = document.getElementById('live-region');
+        if (region) region.textContent = message;
     }
 
     function init() {
@@ -36,6 +64,9 @@
 
         if (searchInput) searchInput.addEventListener('input', render);
         if (sortSelect) sortSelect.addEventListener('change', render);
+
+        document.getElementById('records-tbody').addEventListener('click', handleAction);
+        document.getElementById('records-cards').addEventListener('click', handleAction);
     }
 
     init();

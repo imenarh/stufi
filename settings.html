@@ -54,12 +54,12 @@
                         <h2>Spending Cap</h2>
                         <p class="setting-description">Set a monthly spending limit to track your budget.</p>
                         <div class="setting-row">
-                            <label for="spending-cap" class="form-label">Monthly Limit (RWF )</label>
+                            <label for="spending-cap" class="form-label">Monthly Limit (RWF)</label>
                             <input 
                                 type="text" 
                                 id="spending-cap" 
                                 class="form-input" 
-                                value="500.00"
+                                value="500000.00"
                                 inputmode="decimal"
                                 aria-describedby="cap-hint"
                             >
@@ -74,25 +74,25 @@
                     <div class="card">
                         <h2>Currency Rates</h2>
                         <p class="setting-description">Set manual exchange rates for currency conversion.</p>
-                        <p class="setting-hint">Base currency: RWF </p>
+                        <p class="setting-hint">Base currency: RWF</p>
                         <div class="currency-rates">
                             <div class="setting-row">
-                                <label for="rate-usd" class="form-label">USD Rate (RWF )</label>
+                                <label for="rate-usd" class="form-label">1 RWF = ? USD</label>
                                 <input 
                                     type="text" 
                                     id="rate-usd" 
                                     class="form-input" 
-                                    value="1.27"
+                                    value="0.00078"
                                     inputmode="decimal"
                                 >
                             </div>
                             <div class="setting-row">
-                                <label for="rate-eur" class="form-label">EUR Rate (€)</label>
+                                <label for="rate-eur" class="form-label">1 RWF = ? EUR</label>
                                 <input 
                                     type="text" 
                                     id="rate-eur" 
                                     class="form-input" 
-                                    value="1.17"
+                                    value="0.00072"
                                     inputmode="decimal"
                                 >
                             </div>
@@ -211,6 +211,9 @@
     </div>
 
     <!-- Scripts -->
-    <script type="module" src="scripts/app.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/validators.js"></script>
+    <script src="scripts/settings.js"></script>
+    <script src="scripts/settings-page.js"></script>
 </body>
 </html>

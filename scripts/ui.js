@@ -18,7 +18,7 @@ var UI = (function() {
     function renderTable(recs, regex) {
         var tbody = document.getElementById('records-tbody');
         if (!recs.length) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--color-text-light)">No records found</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--color-text-light)">No records found</td></tr>';
             return;
         }
         var html = '';
@@ -29,6 +29,10 @@ var UI = (function() {
                 '<td>' + Search.highlight(r.description, regex) + '</td>' +
                 '<td><span class="category-badge">' + Search.highlight(r.category, regex) + '</span></td>' +
                 '<td>' + Search.highlight(formatCurrency(r.amount), regex) + '</td>' +
+                '<td class="actions-cell">' +
+                    '<button type="button" class="btn btn-small btn-secondary" data-action="edit" data-id="' + r.id + '" aria-label="Edit ' + escapeHtml(r.description) + '">Edit</button> ' +
+                    '<button type="button" class="btn btn-small btn-danger" data-action="delete" data-id="' + r.id + '" aria-label="Delete ' + escapeHtml(r.description) + '">Delete</button>' +
+                '</td>' +
             '</tr>';
         }
         tbody.innerHTML = html;
@@ -50,10 +54,23 @@ var UI = (function() {
                     '<span class="card-amount">' + Search.highlight(formatCurrency(r.amount), regex) + '</span>' +
                 '</div>' +
                 '<p class="card-description">' + Search.highlight(r.description, regex) + '</p>' +
-                '<span class="card-category">' + Search.highlight(r.category, regex) + '</span>' +
+                '<div class="card-footer">' +
+                    '<span class="card-category">' + Search.highlight(r.category, regex) + '</span>' +
+                    '<div class="card-actions">' +
+                        '<button type="button" class="btn btn-small btn-secondary" data-action="edit" data-id="' + r.id + '" aria-label="Edit">Edit</button> ' +
+                        '<button type="button" class="btn btn-small btn-danger" data-action="delete" data-id="' + r.id + '" aria-label="Delete">Delete</button>' +
+                    '</div>' +
+                '</div>' +
             '</div>';
         }
         container.innerHTML = html;
+    }
+
+    // Escape HTML
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     // Update results count

@@ -40,29 +40,7 @@ var Validators = (function() {
 
     function hasDuplicateWords(value) {
         if (!value) return false;
-        // Create new regex to avoid global flag state issues
         return new RegExp(DUPLICATE_REGEX.source, 'i').test(value);
-    }
-
-    function validateAmount(value) {
-        var str = String(value).trim();
-        if (!str) return false;
-        return AMOUNT_REGEX.test(str);
-    }
-
-    function validateDate(value) {
-        if (!value || value.trim() === '') return false;
-        return DATE_REGEX.test(value);
-    }
-
-    function validateCategory(value) {
-        if (!value || value.trim() === '') return false;
-        return CATEGORY_REGEX.test(value);
-    }
-
-    function hasDuplicateWords(value) {
-        if (!value) return false;
-        return DUPLICATE_REGEX.test(value);
     }
 
     //test function

@@ -251,6 +251,11 @@ a:hover {
     background: #dc2626;
 }
 
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+}
+
 .form-group {
     margin-bottom: 20px;
 }

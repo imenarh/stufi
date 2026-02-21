@@ -3,7 +3,7 @@
     {
       "id": "txn_0001",
       "description": "Lunch at cafeteria",
-      "amount": 12.50,
+      "amount": 3500.00,
       "category": "Food",
       "date": "2026-02-15",
       "createdAt": "2026-02-15T10:30:00.000Z",
@@ -11,8 +11,8 @@
     },
     {
       "id": "txn_0002",
-      "description": "Coffee coffee at Starbucks",
-      "amount": 4.99,
+      "description": "Coffee coffee at Bourbon Coffee",
+      "amount": 2000.00,
       "category": "Food",
       "date": "2026-02-14",
       "createdAt": "2026-02-14T08:15:00.000Z",
@@ -21,7 +21,7 @@
     {
       "id": "txn_0003",
       "description": "Calculus textbook",
-      "amount": 89.99,
+      "amount": 45000.00,
       "category": "Books",
       "date": "2026-02-10",
       "createdAt": "2026-02-10T14:00:00.000Z",
@@ -29,8 +29,8 @@
     },
     {
       "id": "txn_0004",
-      "description": "Monthly bus pass",
-      "amount": 45.00,
+      "description": "moto taxi fare",
+      "amount": 25000.00,
       "category": "Transport",
       "date": "2026-02-01",
       "createdAt": "2026-02-01T09:00:00.000Z",
@@ -38,8 +38,8 @@
     },
     {
       "id": "txn_0005",
-      "description": "Movie ticket - Dune Part Two",
-      "amount": 15.00,
+      "description": "Movie ticket at Canal Olympia",
+      "amount": 5000.00,
       "category": "Entertainment",
       "date": "2026-02-08",
       "createdAt": "2026-02-08T19:30:00.000Z",
@@ -47,17 +47,17 @@
     },
     {
       "id": "txn_0006",
-      "description": "Tuition fee - Spring semester",
-      "amount": 1500.00,
-      "category": "Fees",
+      "description": "Shoe shoping",
+      "amount": 25000.00,
+      "category": "clothing",
       "date": "2026-01-15",
       "createdAt": "2026-01-15T10:00:00.000Z",
       "updatedAt": "2026-01-15T10:00:00.000Z"
     },
     {
       "id": "txn_0007",
-      "description": "Notebook and pens",
-      "amount": 7.45,
+      "description": "Notebooks and pens",
+      "amount": 3500.00,
       "category": "Other",
       "date": "2026-02-05",
       "createdAt": "2026-02-05T11:20:00.000Z",
@@ -66,7 +66,7 @@
     {
       "id": "txn_0008",
       "description": "Breakfast at the the cafe",
-      "amount": 8.75,
+      "amount": 4000.00,
       "category": "Food",
       "date": "2026-02-13",
       "createdAt": "2026-02-13T07:45:00.000Z",
@@ -74,8 +74,8 @@
     },
     {
       "id": "txn_0009",
-      "description": "Library late",
-      "amount": 0.50,
+      "description": "Library late fee",
+      "amount": 500.00,
       "category": "Fees",
       "date": "2026-02-12",
       "createdAt": "2026-02-12T16:00:00.000Z",
@@ -83,8 +83,8 @@
     },
     {
       "id": "txn_0010",
-      "description": "Train ticket to London",
-      "amount": 35.00,
+      "description": "Bus to Huye",
+      "amount": 4500.00,
       "category": "Transport",
       "date": "2026-02-18",
       "createdAt": "2026-02-18T06:00:00.000Z",
@@ -93,7 +93,7 @@
     {
       "id": "txn_0011",
       "description": "Programming with Python",
-      "amount": 45.00,
+      "amount": 35000.00,
       "category": "Books",
       "date": "2026-01-20",
       "createdAt": "2026-01-20T12:00:00.000Z",
@@ -102,7 +102,7 @@
     {
       "id": "txn_0012",
       "description": "Gym membership - February",
-      "amount": 25.00,
+      "amount": 25000.00,
       "category": "Other",
       "date": "2026-02-01",
       "createdAt": "2026-02-01T08:00:00.000Z",
@@ -110,13 +110,12 @@
     }
   ],
   "settings": {
-    "baseCurrency": "GBP",
+    "baseCurrency": "RWF",
     "rates": {
-      "GBP": 1,
-      "USD": 1.27,
-      "EUR": 1.17
+      "USD": 0.00068,
+      "EUR": 0.00058
     },
-    "spendingCap": 500,
-    "categories": ["Food", "Books", "Transport", "Entertainment", "Fees", "Other"]
+    "spendingCap": 500000,
+    "categories": ["Food", "Books", "Transport", "clothing" ,"Entertainment", "Fees", "Other"]
   }
 }

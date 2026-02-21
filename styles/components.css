@@ -190,6 +190,7 @@
 .records-table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 8px;
 }
 
 .records-table th,
@@ -214,6 +215,10 @@
 
 .records-table tbody tr:last-child td {
     border-bottom: none;
+}
+
+.actions-cell {
+    white-space: nowrap;
 }
 
 .records-cards {
@@ -250,14 +255,20 @@
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
-    margin-bottom: 12px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
 }
 
 .card-actions {
     display: flex;
     gap: 8px;
-    padding-top: 12px;
-    border-top: 1px solid var(--color-border);
 }
 
 .category-badge {
